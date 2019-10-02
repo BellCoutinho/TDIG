@@ -25,7 +25,7 @@ public class Janela extends JFrame {
         final JButton button5 = new JButton("Limpar");
         setLayout(new FlowLayout());
         
-        textField1.setToolTipText("Digite um texto para ser aplicado ao botão");
+        button1.setToolTipText("Digite um texto para ser aplicado ao botão");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -38,7 +38,7 @@ public class Janela extends JFrame {
         add(textField1);
         add(button1);
 
-        textField2.setToolTipText("Digite um texto para ser aplicado ao botão");
+        button2.setToolTipText("Digite um texto para ser aplicado ao botão");
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -51,7 +51,7 @@ public class Janela extends JFrame {
         add(textField2);
         add(button2);
 
-        textField3.setToolTipText("Digite um texto para ser aplicado ao botão");
+        button3.setToolTipText("Digite um texto para ser aplicado ao botão");
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -64,8 +64,7 @@ public class Janela extends JFrame {
         add(textField3);
         add(button3);
 
-        textField4.setToolTipText("Digite um texto para ser aplicado ao botão");
-        textField4.setScrollOffset(0);
+        button4.setToolTipText("Digite um texto para ser aplicado ao botão");
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
