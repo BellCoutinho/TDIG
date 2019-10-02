@@ -22,7 +22,7 @@ public class Janela extends JFrame {
         final JButton button2 = new JButton("Aplicar");
         final JButton button3 = new JButton("Aplicar");
         final JButton button4 = new JButton("Aplicar");
-        final JButton button5 = new JButton("Limpar");
+        final JButton button5 = new JButton("Aplicar");
         setLayout(new FlowLayout());
         
         button1.setToolTipText("Digite um texto para ser aplicado ao botão");
@@ -80,10 +80,25 @@ public class Janela extends JFrame {
         button5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                textField1.setText("");
-                textField2.setText("");
-                textField3.setText("");
-                textField4.setText("");
+                if (!textField1.getText().equals(""))
+                    button1.setText(textField1.getText());
+                else
+                    button1.setText("Aplicar");
+
+                if (!textField2.getText().equals(""))
+                    button2.setText(textField2.getText());
+                else
+                    button2.setText("Aplicar");
+
+                if (!textField3.getText().equals(""))
+                    button3.setText(textField3.getText());
+                else
+                    button3.setText("Aplicar");
+
+                if (!textField4.getText().equals(""))
+                    button4.setText(textField4.getText());
+                else
+                    button4.setText("Aplicar");
             }
         });
         add(button5);
