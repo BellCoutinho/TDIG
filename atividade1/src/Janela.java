@@ -1,113 +1,116 @@
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-import javax.swing.UIManager;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
+import java.awt.*;
 
 public class Janela extends JFrame {
+    /**
+     * Array com os JButtons utilizados
+     */
+    private JButton[] buttons;
+    /**
+     * Array com as JTextFields utilizadas
+     */
+    private JTextField[] textFields;
+
     public Janela() {
         super("Atividade 1");
         try {
-            //UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (Exception e){}
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
+        this.setContentPane(getPrincipalPanel());
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setSize(new Dimension(400, 400));
+        this.setMinimumSize(new Dimension(400, 400));
+        this.setMaximumSize(new Dimension(400, 400));
+        this.pack();
+    }
 
-        final JTextField textField1 = new JTextField(20);
-        final JTextField textField2 = new JTextField(20);
-        final JTextField textField3 = new JTextField(20);
-        final JTextField textField4 = new JTextField(20);
-        final JButton button1 = new JButton("Aplicar");
-        final JButton button2 = new JButton("Aplicar");
-        final JButton button3 = new JButton("Aplicar");
-        final JButton button4 = new JButton("Aplicar");
-        final JButton button5 = new JButton("Aplicar");
-        setLayout(new FlowLayout());
-        
-        button1.setToolTipText("Digite um texto para ser aplicado ao botão");
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if (!textField1.getText().equals(""))
-                    button1.setText(textField1.getText());
+    /**
+     * Criar painel com todos os componentes da interface
+     *
+     * @return JPanel com painel de botões e text fields
+     */
+    private JPanel getPrincipalPanel() {
+        JPanel principalPanel = new JPanel(new FlowLayout());
+        principalPanel.setSize(400, 400);
+        principalPanel.setBackground(new Color(64, 64, 63));
+        principalPanel.add(getTextFieldsPanel()); // adicionar text fields
+        principalPanel.add(getButtonsPanel()); // adicionar botões
+
+        return principalPanel;
+    }
+
+    /**
+     * Criar painel com todas as text fields da interface
+     *
+     * @return JPanel com todas as text fields
+     */
+    private JPanel getTextFieldsPanel() {
+        JPanel textFieldPanel = new JPanel(new GridLayout(5, 1, 0, 3));
+        textFieldPanel.setBackground(new Color(64, 64, 63));
+        textFieldPanel.setPreferredSize(new Dimension(250, 300));
+        textFields = new JTextField[4];
+
+        for (int i = 0; i < 4; i++) {
+            textFields[i] = new JTextField(20);
+            textFields[i].setBackground(new Color(164, 165, 166));
+            textFields[i].setBorder(BorderFactory.createEmptyBorder(20, 5, 20, 5));
+            textFieldPanel.add(textFields[i]);
+        }
+
+        return textFieldPanel;
+    }
+
+    /**
+     * Criar todos os botões da interface
+     *
+     * @return JPanel com todos os botões
+     */
+    private JPanel getButtonsPanel() {
+        JPanel buttonsPanel = new JPanel(new GridLayout(5, 1, 2, 2));
+        buttonsPanel.setPreferredSize(new Dimension(100, 300));
+        buttonsPanel.setBackground(new Color(64, 64, 63));
+        buttons = new JButton[5];
+
+        for (int i = 0; i < 4; i++) {
+            buttons[i] = new JButton("Aplicar");
+            buttons[i].setToolTipText("Digite um texto para ser aplicado ao botão");
+            buttons[i].setBorder(BorderFactory.createEmptyBorder(20, 5, 20, 5));
+            buttons[i].setBackground(new Color(89, 89, 89));
+
+            int finalI = i;
+            buttons[i].addActionListener(event -> {
+                if (!textFields[finalI].getText().equals(""))
+                    buttons[finalI].setText(textFields[finalI].getText());
                 else
-                    button1.setText("Aplicar");
+                    buttons[finalI].setText("Aplicar");
+            });
+
+            buttonsPanel.add(buttons[i]);
+        }
+
+        JButton button5 = new JButton("Aplicar");
+        button5.setBorder(BorderFactory.createEmptyBorder(20, 5, 20, 5));
+        button5.setBackground(new Color(89, 89, 89));
+        button5.addActionListener(event -> {
+            for (int i = 0; i < 4; i++) {
+                if (!textFields[i].getText().equals(""))
+                    buttons[i].setText(textFields[i].getText());
+                else
+                    buttons[i].setText("Aplicar");
             }
         });
-        add(textField1);
-        add(button1);
+        buttonsPanel.add(button5);
 
-        button2.setToolTipText("Digite um texto para ser aplicado ao botão");
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if (!textField2.getText().equals(""))
-                    button2.setText(textField2.getText());
-                else
-                    button2.setText("Aplicar");
-            }
-        });
-        add(textField2);
-        add(button2);
-
-        button3.setToolTipText("Digite um texto para ser aplicado ao botão");
-        button3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if (!textField3.getText().equals(""))
-                    button3.setText(textField3.getText());
-                else
-                    button3.setText("Aplicar");
-            }
-        });
-        add(textField3);
-        add(button3);
-
-        button4.setToolTipText("Digite um texto para ser aplicado ao botão");
-        button4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if (!textField4.getText().equals(""))
-                    button4.setText(textField4.getText());
-                else
-                    button4.setText("Aplicar");
-            }
-        });
-        add(textField4);
-        add(button4);
-
-        button5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                if (!textField1.getText().equals(""))
-                    button1.setText(textField1.getText());
-                else
-                    button1.setText("Aplicar");
-
-                if (!textField2.getText().equals(""))
-                    button2.setText(textField2.getText());
-                else
-                    button2.setText("Aplicar");
-
-                if (!textField3.getText().equals(""))
-                    button3.setText(textField3.getText());
-                else
-                    button3.setText("Aplicar");
-
-                if (!textField4.getText().equals(""))
-                    button4.setText(textField4.getText());
-                else
-                    button4.setText("Aplicar");
-            }
-        });
-        add(button5);
-
-        setSize(400,400);
-        setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        
+        return buttonsPanel;
     }
 }

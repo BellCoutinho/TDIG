@@ -1,12 +1,7 @@
-import java.awt.EventQueue;
+import java.awt.*;
 
 public class Main {
-    public static void main (String[] args) {
-       EventQueue.invokeLater(new Runnable() {
-           @Override
-           public void run() {
-               new Janela();
-           }
-       });
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> new Janela().setVisible(true));
     }
 }
