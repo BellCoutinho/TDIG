@@ -1,6 +1,18 @@
-import javax.swing.*;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Dimension;
+import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+
 
 public class Janela extends JFrame {
     /**
@@ -88,25 +100,32 @@ public class Janela extends JFrame {
             buttons[i].setBackground(new Color(89, 89, 89));
 
             int finalI = i;
-            buttons[i].addActionListener(event -> {
-                if (!textFields[finalI].getText().equals(""))
-                    buttons[finalI].setText(textFields[finalI].getText());
-                else
-                    buttons[finalI].setText("Aplicar");
+            buttons[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    if (!textFields[finalI].getText().equals(""))
+                        buttons[finalI].setText(textFields[finalI].getText());
+                    else
+                        buttons[finalI].setText("Aplicar");
+                    }
             });
 
             buttonsPanel.add(buttons[i]);
         }
 
         JButton button5 = new JButton("Aplicar");
+        button5.setToolTipText("Aplica em todos os botões os textos dos seus respectivos campos");
         button5.setBorder(BorderFactory.createEmptyBorder(20, 5, 20, 5));
         button5.setBackground(new Color(89, 89, 89));
-        button5.addActionListener(event -> {
-            for (int i = 0; i < 4; i++) {
-                if (!textFields[i].getText().equals(""))
-                    buttons[i].setText(textFields[i].getText());
-                else
-                    buttons[i].setText("Aplicar");
+        button5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                for (int i = 0; i < 4; i++) {
+                    if (!textFields[i].getText().equals(""))
+                        buttons[i].setText(textFields[i].getText());
+                    else
+                        buttons[i].setText("Aplicar");
+                }
             }
         });
         buttonsPanel.add(button5);
