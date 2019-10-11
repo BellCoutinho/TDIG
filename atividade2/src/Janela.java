@@ -28,7 +28,6 @@ public class Janela extends JFrame {
         this.pack();
     }
 
-
     private JPanel getPrincipalPanel() {
         JPanel principalPanel = new JPanel(new BorderLayout());
         JPanel container = new JPanel(new BorderLayout());
