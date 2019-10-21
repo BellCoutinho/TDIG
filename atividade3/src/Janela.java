@@ -1,120 +1,77 @@
-import javax.swing.*;
+import java.awt.BorderLayout;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Janela extends JFrame {
 
-    private JPanel principalPanel;
-    private JTextField textField;
-    private JCheckBox checkBox;
+    private JPanel contentPane;
 
-    public Janela() {
-        super("Atividade 3");
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Janela frame = new Janela();
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.paint(null);
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-        } catch (Exception ignored) {
-        }
-
-        this.setSize(300, 450);
-        this.setPreferredSize(new Dimension(300, 400));
-        this.setContentPane(getPrincipalPanel());
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.pack();
+        });
     }
 
-    private JPanel getPrincipalPanel() {
-        principalPanel = new JPanel(new FlowLayout());
+     public void paint(Graphics g)
+      {
+             g.setColor(Color.BLACK);
+             g.drawRect(175, 225, 400, 300);
+             g.drawRect(200, 250, 350, 50);
 
-        principalPanel.setPreferredSize(new Dimension(300, 400));
-        principalPanel.setBackground(new Color(255, 255, 255));
+             //botao
+             g.setColor(Color.BLUE);
+             g.drawRect(435, 450, 100, 50);
+      }
 
-        principalPanel.add(getTextPanel());
-        principalPanel.add(getCheckPanel());
-        principalPanel.add(getButtonPanel());
+    /**
+     * Create the frame.
+     */
+    public Janela() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(1000, 100, 1000, 1000);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 
-        return principalPanel;
-    }
+        JPanel panel = new JPanel();
+        panel.setBounds(0, 0, 592, 410);
+        contentPane.add(panel);
 
-    private JPanel getButtonPanel() {
-        JButton button = new JButton("Login");
-        ButtonHandler handler = new ButtonHandler();
-        JPanel buttonPanel = new JPanel();
+        panel.addMouseListener(new MouseAdapter() {
 
-        buttonPanel.setPreferredSize(new Dimension(200, 150));
-        buttonPanel.setBackground(new Color(255, 255, 255));
+            public void mouseClicked(MouseEvent e) {
 
-        button.setBackground(new Color(208, 208, 208));
-        button.setPreferredSize(new Dimension(100, 50));
-        button.addActionListener(handler);
-        button.setToolTipText("Fazer Login");
-        buttonPanel.add(button);
+                System.out.println(e.getX() + " " + e.getY());
 
-        return buttonPanel;
-    }
+               if( (e.getY() > 435 && e.getY()<535) && (e.getX() > 450 && e.getX() < 500))
+                System.out.println("funcionou");
 
-    private JPanel getCheckPanel() {
-        JPanel checkPanel = new JPanel(new BorderLayout());
-
-        checkBox = new JCheckBox();
-        checkBox.setText("Manter conectado");
-        checkBox.setToolTipText("Continuar Logado");
-
-        checkPanel.setPreferredSize(new Dimension(200, 150));
-        checkPanel.setBackground(new Color(255, 255, 255));
-
-        checkPanel.add(checkBox);
-
-        return checkPanel;
-    }
-
-    private JPanel getTextPanel() {
-        JPanel textPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
-        JLabel label = new JLabel("User ");
-        label.setBorder(BorderFactory.createEmptyBorder(25, 10, 25, 10));
-        textPanel.setBackground(new Color(255, 255, 255));
-
-        textField = new JTextField();
-        textField.setPreferredSize(new Dimension(200, 50));
-        textField.setToolTipText("Insira username");
-
-        c.gridheight = 2;
-        textPanel.add(label);
-        c.gridy = 4;
-        textPanel.add(textField, c);
-
-        return textPanel;
-
-    }
-
-    private class ButtonHandler implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JPanel alert = new JPanel(new BorderLayout());
-            JLabel label1 = new JLabel("Login: " + textField.getText());
-            String manterLogin;
-            if (checkBox.isSelected()) {
-                manterLogin = "Sim";
-            } else {
-                manterLogin = "Não";
             }
-            JLabel label2 = new JLabel("Manter conectado: " + manterLogin);
-            alert.add(label1, BorderLayout.NORTH);
-            alert.add(label2, BorderLayout.SOUTH);
-            JOptionPane.showMessageDialog(null, alert, "Confirmar", JOptionPane.PLAIN_MESSAGE);
 
-        }
+        });
     }
-
-
 }
