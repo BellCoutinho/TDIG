@@ -12,21 +12,24 @@ import javax.swing.JPanel;
 import java.util.ArrayList;
 
 public class Janela extends JFrame {
-    private String texto;
+    private StringBuilder texto;
+    private boolean onFocus;
     public Janela() {
         super("Atividade 3");
         
-        texto = new String("");
+        texto = new StringBuilder("");
 
         Panel panel = new Panel();
         add(panel);
         addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent event){
-                texto += event.getKeyChar();
-                System.out.println("Characters: " + event.getKeyChar());
+                if (onFocus) {
+                    texto.append(event.getKeyChar());
+                    panel.revalidate();
+                    panel.repaint();
+                }
 
-                //repaint();
               }
         });
         this.setSize(600, 500);
@@ -42,8 +45,12 @@ public class Janela extends JFrame {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent event) {
-                    if ((event.getX() > 50 && event.getX() < 550) && (event.getY() > 30 && event.getY() < 80))  
-                        System.out.printf("Mouse (%d, %d)\n", event.getX(), event.getY());
+                    if ((event.getX() > 50 && event.getX() < 550) && (event.getY() > 30 && event.getY() < 80)) {
+                        onFocus = true;
+                    } else {
+                        texto.setLength(0);
+                        onFocus = false;
+                    }
                 }
             });
            
@@ -55,7 +62,7 @@ public class Janela extends JFrame {
             g.setFont(new Font("SansSerif", Font.PLAIN, 14));
             g.drawRect(10, 10, 575, 449);
             g.drawRect(50, 30, 500, 50);
-            g.drawString(texto, 50, 100);
+            g.drawString(texto.toString(), 51, 60);
         }
     }   
 }
