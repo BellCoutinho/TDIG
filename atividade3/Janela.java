@@ -12,14 +12,18 @@ import javax.swing.JPanel;
 import java.util.ArrayList;
 
 public class Janela extends JFrame {
+    private String texto;
     public Janela() {
         super("Atividade 3");
+        
+        texto = new String("");
 
         Panel panel = new Panel();
         add(panel);
         addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent event){
+                texto += event.getKeyChar();
                 System.out.println("Characters: " + event.getKeyChar());
 
                 //repaint();
@@ -33,9 +37,7 @@ public class Janela extends JFrame {
         this.pack();
     }   
     public class Panel extends JPanel {
-        private String texto;
         public Panel() {
-            texto = new String("");
 
             addMouseListener(new MouseAdapter() {
                 @Override
@@ -53,7 +55,7 @@ public class Janela extends JFrame {
             g.setFont(new Font("SansSerif", Font.PLAIN, 14));
             g.drawRect(10, 10, 575, 449);
             g.drawRect(50, 30, 500, 50);
-            g.drawString(texto, 20, 110);
+            g.drawString(texto, 50, 100);
         }
     }   
 }
