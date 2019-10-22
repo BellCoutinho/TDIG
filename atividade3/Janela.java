@@ -25,7 +25,13 @@ public class Janela extends JFrame {
             @Override
             public void keyPressed(KeyEvent event){
                 if (onFocus) {
-                    texto.append(event.getKeyChar());
+                    if (event.getKeyChar() == event.VK_BACK_SPACE) {
+                        if (texto.length() != 0) {
+                           texto.setLength(texto.length() - 1);
+                        }
+                    } else {
+                        texto.append(event.getKeyChar());
+                    }
                     panel.revalidate();
                     panel.repaint();
                 }
