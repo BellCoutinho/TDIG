@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Janela extends JFrame {
     private StringBuilder texto;
     private boolean onFocus;
+    private boolean checkBoxEstado;
     public Janela() {
         super("Atividade 3");
         
@@ -59,6 +60,10 @@ public class Janela extends JFrame {
                         revalidate();
                         repaint();
                     }
+
+                    if ((event.getX() > 50 && event.getX() < 100) && (event.getY() > 100 && event.getY() < 150)) {
+                        checkBoxEstado = !checkBoxEstado;
+                    }
                 }
             });
            
@@ -68,8 +73,16 @@ public class Janela extends JFrame {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.setFont(new Font("SansSerif", Font.PLAIN, 14));
+            //Retangulo externo
             g.drawRect(10, 10, 575, 449);
+            //TextField
             g.drawRect(50, 30, 500, 50);
+
+            g.drawRect(50, 100, 50, 50);
+            if (checkBoxEstado) {
+                g.setColor(Color.BLACK);
+                g.fillRect(50, 100, 50, 50);
+            }
             g.drawString(texto.toString(), 51, 60);
         }
     }   
