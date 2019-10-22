@@ -56,6 +56,8 @@ public class Janela extends JFrame {
                     } else {
                         texto.setLength(0);
                         onFocus = false;
+                        revalidate();
+                        repaint();
                     }
                 }
             });
