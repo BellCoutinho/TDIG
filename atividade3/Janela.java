@@ -9,12 +9,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Janela extends JFrame {
     private StringBuilder texto;
     private boolean onFocus;
     private boolean checkBoxEstado;
+    private boolean submit;
     public Janela() {
         super("Atividade 3");
         
@@ -54,15 +55,23 @@ public class Janela extends JFrame {
                 public void mouseClicked(MouseEvent event) {
                     if ((event.getX() > 50 && event.getX() < 550) && (event.getY() > 30 && event.getY() < 80)) {
                         onFocus = true;
-                    } else {
-                        texto.setLength(0);
-                        onFocus = false;
+                    }
+                    
+                    if ((event.getX() > 50 && event.getX() < 100) && (event.getY() > 100 && event.getY() < 150)) {
+                        checkBoxEstado = !checkBoxEstado;
                         revalidate();
                         repaint();
                     }
 
-                    if ((event.getX() > 50 && event.getX() < 100) && (event.getY() > 100 && event.getY() < 150)) {
-                        checkBoxEstado = !checkBoxEstado;
+                    if ((event.getX() > 50 && event.getX() < 130) && (event.getY() > 200 && event.getY() < 240)) {
+                        StringBuilder mensagem = new StringBuilder("");
+                        mensagem.append("TextFiel: " + texto);
+                        if (checkBoxEstado) {
+                            mensagem.append("CheckBox: " + "Ativo");
+                        } else {
+                            mensagem.append("CheckBox: " + "Desativo");
+                        }
+                        JOptionPane.showMessageDialog(null, mensagem);
                     }
                 }
             });
@@ -78,11 +87,14 @@ public class Janela extends JFrame {
             //TextField
             g.drawRect(50, 30, 500, 50);
 
+            // CheckBox
             g.drawRect(50, 100, 50, 50);
             if (checkBoxEstado) {
                 g.setColor(Color.BLACK);
                 g.fillRect(50, 100, 50, 50);
             }
+
+            g.drawRect(50, 200, 80, 40);
             g.drawString(texto.toString(), 51, 60);
         }
     }   
