@@ -1,8 +1,22 @@
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicMenuBarUI;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JComponent;
+import javax.swing.BorderFactory;
+import javax.swing.UIManager;
+import javax.swing.plaf.basic.BasicMenuBarUI;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
+import javax.swing.JCheckBoxMenuItem; 
+import javax.swing.MenuElement;
+import javax.swing.JPopupMenu;
+import javax.swing.JEditorPane;
 
 public class Janela extends JFrame {
     private boolean darkMode = false;
@@ -27,11 +41,10 @@ public class Janela extends JFrame {
     }
 
     private JMenuBar getTopBar() {
-        JMenu menu = new JMenu("Acessibilidade");
-        JMenuItem altoContraste = new JMenuItem("Modo alto contraste");
-        JMenuItem modoAmpliado = new JMenuItem("Modo ampliado");
         menuBar = new JMenuBar();
-        menuBar.setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 0));
+        JMenu menu = new JMenu("Configuração");
+        JCheckBoxMenuItem altoContraste = new JCheckBoxMenuItem("Modo alto contraste");
+        JCheckBoxMenuItem modoAmpliado = new JCheckBoxMenuItem("Modo ampliado");
 
         altoContraste.addActionListener(new ActionListener() {
             @Override
@@ -48,9 +61,9 @@ public class Janela extends JFrame {
             }
         });
 
+        menuBar.add(menu);
         menu.add(altoContraste);
         menu.add(modoAmpliado);
-        menuBar.add(menu);
         setDarkMode();
         return menuBar;
     }
@@ -58,9 +71,9 @@ public class Janela extends JFrame {
     private void setFontMode() {
         Font font;
         if (fontMode)
-            font = new java.awt.Font("Arial", Font.BOLD, 24);
+            font = new Font("Arial", Font.BOLD, 24);
         else
-            font = new java.awt.Font("Arial", Font.BOLD, 12);
+            font = new Font("Arial", Font.BOLD, 12);
 
         textArea.setFont(font);
         MenuElement[] menus = menuBar.getSubElements();
@@ -93,7 +106,7 @@ public class Janela extends JFrame {
                 "comunicação e informação”.\n\n" +
                 "    https://mwpt.com.br/acessibilidade-digital/leis-federais-sobre-acessibilidade-na-web/\n\n");
         textArea.setEditable(false);
-        textArea.setFont(new java.awt.Font("Arial", Font.PLAIN, 12));
+        textArea.setFont(new Font("Arial", Font.PLAIN, 12));
 
         return textArea;
     }
@@ -104,8 +117,11 @@ public class Janela extends JFrame {
         menuBar.setUI(new BasicMenuBarUI() {
             @Override
             public void paint(Graphics g, JComponent c) {
-                if (darkMode) g.setColor(Color.black);
-                else g.setColor(Color.white);
+                if (darkMode)
+                    g.setColor(Color.black);
+                else
+                    g.setColor(Color.white);
+
                 g.fillRect(0, 0, c.getWidth(), c.getHeight());
             }
         });
