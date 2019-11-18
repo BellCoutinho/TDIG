@@ -1,0 +1,144 @@
+
+/* Header */
+
+
+.container {
+    width: 100%;
+    height: 80%;
+    justify-content: center;
+}
+
+.logo {
+    background-color: whitesmoke;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+/* Nav */
+
+nav {
+    justify-content: center;
+    background-color: snow;
+
+}
+.menu {
+    height: 40%;
+    
+}
+
+.menu ul {
+    text-decoration: none;
+    list-style: none;
+    text-align: center;
+    padding: 0.5%;
+}
+
+.menu li {
+    display: inline;
+    padding-left: 5%;
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    font-size: 150%;
+}
+
+/* section - content */
+section {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    float: right;
+    margin: 1%;
+}
+
+.content {
+   
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.noticia {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+    height: 100%;
+    margin: 1.5%;
+}
+
+.tituloNoticia {
+    width: 100%;
+    height: 30%;
+    font-size: 150%;
+    margin-left: 3%;
+    margin-right: 3%;
+    
+    
+}
+
+.tituloNoticia p{
+    color: blue;
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin: 0;
+    
+}
+
+.resumo {
+    margin: 2%;
+}
+
+.resumo p{
+    text-align: center;
+    font-size: 100%;
+}
+.imagem {
+    width: 80%;
+    height: 100%;
+    padding-left: 10%;
+    padding-top: 5%;
+}
+
+.imagem  img{
+    width: 100%;
+    height: 100%;
+}
+
+/* aside */
+aside {
+    width: 17%;
+    height: 60%;
+    border-right: solid ;
+}
+.lista {
+    border-right: solid black 1%;
+    height: 50%;
+}
+
+.lista ul {
+    list-style: none;
+    color: black;
+}
+
+.lista li {
+    padding: 5%;
+    text-align: left;
+}
+
+.lista li a {
+    text-decoration: none;
+    color: black;
+    font-size: 120%;
+   
+    
+}
